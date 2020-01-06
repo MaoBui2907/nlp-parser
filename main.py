@@ -10,6 +10,7 @@ NP[rn=?x, jj=?y, in=?z] -> PRP[rn=?x, jj=?y, in=?z]
 NP[rn=?x, jj=?y, in=?z] -> UNN[rn=?x] NN[rn=?x, jj=?y, in=?z]
 NP[rn=?x, jj=?y, in=?z] -> DET[] NP[rn=?x, jj=?y, in=?z]
 
+NP[rn=?x, jj=?y, in=?z] -> NP2[] CC[] NP[]
 NP[rn=?x, jj=?y, in=?z] -> NP2[rn=?x] PP[rn=?x]
 NP[rn=?x, jj=?y, in=?z] -> NP2[rn=?x, jj=?y, in=?z] JJ[jj=?y]
 NP2[rn=?x, jj=?y, in=?z] -> NP1[rn=?x] PP[rn=?x]
@@ -32,9 +33,14 @@ PP[rn=?x] -> IN[ri=?x, in=?z] NP[in=?z]
 
 DET[] -> "các"
 
+CC[] -> "và"
+CC[] -> "cùng"
+CC[] -> "với"
+
 PRP[rn=nguoi] -> "tôi"
 
 NNP[rn=nguoi] -> "Nam"
+NNP[rn=nguoi] -> "Hoa"
 
 UNN[rn=dong_vat] -> "con"
 UNN[rn=dong_vat] -> "đàn"
@@ -45,30 +51,37 @@ UNN[] -> "bọn"
 UNN[rn=nguoi] -> "ông"
 UNN[rn=nguoi] -> "đứa"
 
+NN[] -> "con"
+NN[rn=mon_hoc] -> "toán"
 NN[rn=dong_vat] -> "cá"
 NN[rn=nguoi] -> "trẻ"
 NN[rn=nguoi] -> "bé"
 NN[rn=nguoi] -> "lão"
+NN[rn=nguoi] -> "mẹ"
 NN[rn=nguoi] -> "vận_động_viên"
 NN[rn=dong_vat] -> "chim"
-NN[rn=vat_the] -> "mặt_trời"
 NN[rn=dong_vat] -> "voi"
+NN[rn=dong_vat] -> "gà"
+NN[rn=vat_the] -> "mặt_trời"
 NN[rn=thuc_vat] -> "cỏ"
 NN[rn=thuc_vat, in=cay] -> "cây"
 NN[rn=do_vat] -> "xe"
 NN[rn=do_vat] -> "xương"
+NN[rn=do_vat] -> "bóng"
+NN[rn=am_thanh] -> "nhạc"
 NN[rn=do_vat, in=thuyen] -> "thuyền"
 NN[rn=do_vat, in=noi] -> "nôi"
 NN[rn=su_vat, in=ao] -> "ao"
 NN[rn=su_vat, in=bo] -> "bờ"
+NN[rn=su_vat] -> "nắng"
 NN[rn=su_vat] -> "sân"
 NN[rn=do_vat] -> "nhà"
-NN[rn=do_vat, jj=vang] -> "lá"
-NN[rn=dong_vat, jj=den] -> "mèo"
-NN[rn=dong_vat, jj=gay] -> "ngựa"
+NN[rn=do_vat] -> "lá"
+NN[rn=dong_vat] -> "mèo"
+NN[rn=dong_vat] -> "ngựa"
 NN[rn=dong_vat, jj=nho] -> "kiến"
-NN[rn=dong_vat, jj=nho] -> "chó"
-NN[rn=dong_vat, jj=vang] -> "nai"
+NN[rn=dong_vat] -> "chó"
+NN[rn=dong_vat] -> "nai"
 
 IN[] -> "của"
 IN[ri=nguoi] -> "trên"
@@ -76,11 +89,13 @@ IN[] -> "trong"
 IN[] -> "ở"
 IN[in=bo] -> "lên"
 
+JJ[jj=mai] -> "mái"
 JJ[jj=den] -> "đen"
 JJ[jj=gay] -> "gầy"
 JJ[jj=nho] -> "nhỏ"
 JJ[jj=vang] -> "vàng"
 
+VB[] -> "học"
 VB[] -> "ngủ"
 VB[] -> "chơi"
 VB[rn=nguoi] -> "luyện_tập"
@@ -89,14 +104,15 @@ VB[rn=dong_vat] -> "bay"
 VB[rn=vat_the] -> "mọc"
 VB[] -> "nhảy"
 VB[] -> "chạy"
+VB[] -> "tắm"
 VB[rn=do_vat] -> "rụng"
 VB[rn=do_vat] -> "cháy"
-VB[rn=dong_vat, rd=dong_vat] -> "tấn_công"
-VB[rn=dong_vat, rd=dong_vat] -> "ăn"
+VB[] -> "tấn_công"
 VB[rn=dong_vat, rd=do_vat] -> "kéo"
 VB[rn=dong_vat, rd=do_vat] -> "gặm"
-VB[rn=dong_vat, rd=thuc_vat] -> "ăn"
+VB[] -> "ăn"
 VB[rn=nguoi, rd=dong_vat] -> "câu"
+VB[rd=am_thanh] -> "nghe"
 """)
 
 parser = nltk.parse.FeatureChartParser(grammar)
@@ -125,9 +141,15 @@ sentences_4 = ["bọn trẻ chơi ở nhà",
                "con chó chạy trên bãi cỏ",
                "ông lão câu cá trên thuyền"]
 
+sentences_5 = ["tôi và Nam nghe nhạc",
+               "đứa bé cùng mẹ chơi bóng",
+               "chó với mèo chạy trên sân",
+               "gà mái cùng đàn con tắm nắng",
+               "tôi và Hoa học toán"]
+
 tests = ["ông lão câu cá trên thuyền"]
 tests2 = ["con cá trong ao nhảy lên bờ"]
-for sent in sentences_4:
+for sent in sentences_5:
     print(sent)
     words = sent.split()
     for tree in parser.parse(words):
