@@ -187,7 +187,7 @@ validates = ["tôi và Nam chơi bóng ở nhà",
              "chiếc ô_tô đen chạy trên sân",
              "tôi nghiên_cứu ở nhà",
              "cá vàng bơi trong ao",
-             "Hoa câu cá",
+             "Hoa câu cá vàng",
              "chiếc lá vàng cháy trên cây",
              "mặt_trời bắt chuột",
              "gà mái bay",
@@ -198,7 +198,7 @@ validates = ["tôi và Nam chơi bóng ở nhà",
              "tôi ngủ trên thuyền",
              "mèo vào cửa_hàng",
              "mèo đen tiêu_diệt chó nhỏ",
-             "ngựa vàng kéo mặt_trời"]
+             "ngựa vàng kéo ô_tô"]
 
 for sent in validates:
     print(sent)
